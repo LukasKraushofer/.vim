@@ -76,18 +76,15 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'ctrlpvim/ctrlp.vim'
-" │ lightline.vim/
 Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-" │ tsuquyomi/
-" │ typescript-vim/
-" │ vim-js-pretty-template/
-" │ vim-sensible/
-" │ vim-vue/
-" Plugin 'airblade/vim-gitgutter'
-" Plugin 'tpope/vim-ragtag'
-" Plugin 'othree/html5.vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'othree/html5.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'alvan/vim-closetag'
+Plugin 'dzeban/vim-log-syntax'
+Plugin 'skywind3000/asyncrun.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -100,7 +97,7 @@ filetype plugin indent on
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time; also in vim-sensible
 set showcmd		" display incomplete commands
-set tabstop=3 shiftwidth=3 softtabstop=3 expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 set encoding=utf-8 " also in vim-sensible
 set scrolloff=2
 set autoindent " also in vim-sensible
@@ -136,10 +133,12 @@ set switchbuf=usetab
 set backupdir-=.
 set backupdir^=$TEMP
 
+set directory-=.
+
 " gui settings
 set guioptions=acgR
-"set guifont=Anonymous_Pro:h11:cANSI
-set guifont=Source_Code_pro:h10:cANSI:qDRAFT
+set guifont=Anonymous_Pro:h11:cANSI
+" set guifont=Source_Code_pro:h10:cANSI:qDRAFT
 set columns=120
 set lines=45
 color desert
@@ -191,9 +190,21 @@ let g:ctrlp_custom_ignore = {
 " Nerd Commenter
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCustomDelimiters = {
+   \ 'typescript': { 'left': '// ' },
+   \ 'javascript': { 'left': '// ' }
+\ }
 
 " autocmd FileType javascript JsPreTmpl html
 " autocmd FileType typescript syn clear foldBraces
+
+" tsuquyomi
+if has("balloon_eval")
+   set ballooneval
+   autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+endif
+let g:tsuquyomi_shortest_import_path=1
+let g:tsuquyomi_single_quote_import=1
 
 behave mswin
 
@@ -212,6 +223,10 @@ nnoremap <esc> :noh<return><esc>
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
+" navigate in quickfix
+nnoremap <F11> :cprev<return>
+nnoremap <F12> :cnext<return>
+
 " Easy Expand of the Active File Directory
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
@@ -227,3 +242,12 @@ nmap <F3> :CtrlP .<CR>
 " NERDTree Mappings
 nnoremap <F4> :NERDTree<CR>
 nnoremap <F5> :NERDTreeFind<CR>
+
+" tsuquyomi shortcuts
+nnoremap <Leader>d :TsuDefinition<return>
+nnoremap <Leader>b :TsuGoBack<return>
+nnoremap <Leader>r :TsuReferences<return>
+nnoremap <Leader>q :TsuQuickFix<return>
+
+" unmap mswin mappings
+unmap <C-Z>
