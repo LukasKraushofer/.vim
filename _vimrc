@@ -85,6 +85,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'alvan/vim-closetag'
 Plugin 'dzeban/vim-log-syntax'
 Plugin 'skywind3000/asyncrun.vim'
+Plugin 'LukasKraushofer/todo.txt-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -212,6 +213,7 @@ behave mswin
 """""""""""""""
 " change mapleader to "ö"
 let mapleader="ö"
+let maplocalleader="ö"
 
 ":clear last highlighted search
 nnoremap <esc> :noh<return><esc>
