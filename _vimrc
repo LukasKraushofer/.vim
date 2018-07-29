@@ -1,9 +1,23 @@
-" important source includes
-source $VIMRUNTIME/mswin.vim
-
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+
+if has("win32")
+    " important source includes
+    source $VIMRUNTIME/mswin.vim
+
+    " unmap mswin mappings
+
+    unmap <C-Z>
+    " opened an unneeded search dialog
+    unmap <C-F>
+    iunmap <C-F>
+    cunmap <C-F>
+    " opened an unneeded replace dialog
+    unmap <C-H>
+    iunmap <C-H>
+    cunmap <C-H>
+endif
 
 if has("vms")
    set nobackup		" do not keep a backup file, use versions instead
@@ -207,8 +221,6 @@ endif
 let g:tsuquyomi_shortest_import_path=1
 let g:tsuquyomi_single_quote_import=1
 
-behave mswin
-
 " key mappings
 """""""""""""""
 " change mapleader to "ö"
@@ -251,5 +263,3 @@ nnoremap <Leader>b :TsuGoBack<return>
 nnoremap <Leader>r :TsuReferences<return>
 nnoremap <Leader>q :TsuQuickFix<return>
 
-" unmap mswin mappings
-unmap <C-Z>
