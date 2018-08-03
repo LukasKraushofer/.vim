@@ -7,6 +7,8 @@ if has("win32")
     source $VIMRUNTIME/mswin.vim
 
     " unmap mswin mappings
+    " windows uses ~/vimfiles but I like ~/.vim better
+    set rtp+=~/.vim
 
     unmap <C-Z>
     " opened an unneeded search dialog
@@ -71,41 +73,29 @@ endif " has("autocmd")
 " My new _vimrc
 """"""""""""""""
 
-set rtp+=~/.vim
 
-filetype off
+" alternatively, pass a path where vim-plug should install plugins
+call plug#begin('~/.vim/bundle')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'othree/html5.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'alvan/vim-closetag'
-Plugin 'dzeban/vim-log-syntax'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'LukasKraushofer/todo.txt-vim'
+Plug 'junegunn/vim-plug'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'Quramy/tsuquyomi'
+Plug 'othree/html5.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'alvan/vim-closetag'
+Plug 'dzeban/vim-log-syntax'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'LukasKraushofer/todo.txt-vim'
+
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-
-syntax on
-
-filetype plugin indent on
+call plug#end()
 
 " configurations
 """""""""""""""""
