@@ -21,12 +21,6 @@ if has("win32")
     cunmap <C-H>
 endif
 
-if has("vms")
-   set nobackup		" do not keep a backup file, use versions instead
-else
-   set backup		" keep a backup file
-endif
-
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
    set mouse=a
