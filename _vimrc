@@ -19,6 +19,8 @@ if has("win32")
     unmap <C-H>
     iunmap <C-H>
     cunmap <C-H>
+    " selects all
+    nunmap <C-A>
 endif
 
 " In many terminal emulators the mouse works just fine, thus enable it.
@@ -87,6 +89,7 @@ Plug 'alvan/vim-closetag'
 Plug 'dzeban/vim-log-syntax'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'LukasKraushofer/todo.txt-vim'
+Plug 'RRethy/vim-illuminate'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -142,7 +145,7 @@ set columns=120
 set lines=45
 color desert
 
-function MyDiff()
+function! MyDiff()
    let opt = '-a --binary '
    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
@@ -198,18 +201,23 @@ let g:NERDCustomDelimiters = {
 " autocmd FileType typescript syn clear foldBraces
 
 " tsuquyomi
-if has("balloon_eval")
-   set ballooneval
-   autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
-endif
+" if has("balloon_eval")
+   " set ballooneval
+   " autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+" endif
+let g:tsuquyomi_completion_detail=1
 let g:tsuquyomi_shortest_import_path=1
 let g:tsuquyomi_single_quote_import=1
+let g:tsuquyomi_use_local_typescript=0
+let g:tsuquyomi_use_dev_node_module=0
+
+autocmd FileType typescript setlocal completeopt+=menu
 
 " key mappings
 """""""""""""""
 " change mapleader to "ö"
-let mapleader="ö"
-let maplocalleader="ö"
+" let mapleader="ö"
+" let maplocalleader="ö"
 
 ":clear last highlighted search
 nnoremap <esc> :noh<return><esc>
@@ -238,7 +246,7 @@ nnoremap <C-Tab> <C-^>
 nmap <F3> :CtrlP .<CR>
 
 " NERDTree Mappings
-nnoremap <F4> :NERDTree<CR>
+nnoremap <F4> :NERDTreeToggle<CR>
 nnoremap <F5> :NERDTreeFind<CR>
 
 " tsuquyomi shortcuts
